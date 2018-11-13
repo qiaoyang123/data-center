@@ -1,0 +1,22 @@
+adonis:
+  xconf:
+    address: 192.168.7.68:2181,192.168.7.69:2181,192.168.7.70:2181
+
+dubbo:
+  registry:
+    id: my-reg
+    protocol: zookeeper
+    address: 192.168.7.68:2181,192.168.7.69:2181,192.168.7.70:2181
+  protocol:
+    id: dubbo
+    name: dubbo
+    port: 20880
+
+cas:
+  clientHostUrl: http://47.99.225.89/api
+  serverHostUrl: http://47.96.222.109/ygg-sso
+
+front:
+  serverUrl: http://47.99.225.89/#/
+
+platform_id: 29

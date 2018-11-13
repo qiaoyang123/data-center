@@ -1,0 +1,10 @@
+adonis:
+  xconf:
+    address: 47.99.2.51:2181,47.99.2.51:2182,47.99.2.51:2183
+
+dubbo:
+  registry:
+    id: center-service-reg
+    protocol: zookeeper
+    address: 47.99.2.51:2181,47.99.2.51:2182,47.99.2.51:2183
+

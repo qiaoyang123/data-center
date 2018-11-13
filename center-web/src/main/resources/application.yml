@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: @profileActive@
+app:
+  name: data_center_web_consumer
+  owner: qy
+
+
+#adonis:
+#  dubbo:
+#    application:
+#      name: ${app.name}
+#      owner: ${app.owner}
+#      scanPackage: com.ggj.datacenter
+dubbo:
+  scan:
+    basePackages: com.ggj.datacenter
+  application:
+    id: data_center_web_consumer
+    name:  data_center_web_consumer
+    owner: qy
+
+server:
+  port: 8082
+

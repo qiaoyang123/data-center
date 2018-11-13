@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: @profileActive@
+
+adonis:
+  datasource:
+    xconfKey:
+      write: datacenter
+      read: datacenter
+    mapperPackage: com.ggj.datacenter.**.mapper
+  onecache:
+    redis:
+      servers:
+        - xconfKey: "bigdata" #xconf中redis的key值，忽略前缀redis和后续的host、port、password等。例如本例中在xconf中为：redis.platform.host
+          prefix: "bigdata" #前缀, 默认为""
+          supportAnnotation: true #是否支持注解，仅有一个可以支持
+
+dubbo:
+  scan:
+    basePackages: com.ggj.datacenter
+  application:
+    id: data-center-service-provider
+    name:  data-center-service-provider
+    owner: qy
+

@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    active: @profileActive@
+
+adonis:
+  datasource:
+    xconfKey:
+      write: odps_bigdata
+      read: odps_bigdata
+    mapperPackage: com.ggj.datacenter.**.mapper
+
+    maxActive: 100   #最大允许连接数，默认100
+    minIdle: 20      #最小空闲连接数，默认20
+    initialSize: 20  #初始化建立的连接数
+    maxWait: 10000  #获取连接的最大等待时间10s
+  onecache:
+    redis:
+      servers:
+      - xconfKey: "bigdata" #xconf中redis的key值，忽略前缀redis和后续的host、port、password等。例如本例中在xconf中为：redis.platform.host
+        prefix: "bigdata" #前缀, 默认为""
+        supportAnnotation: true #是否支持注解，仅有一个可以支持
+dubbo:
+  scan:
+    basePackages: com.ggj.datacenter
+  application:
+    id: data-center-server-provider
+    name:  data-center-server-provider
+    owner: qy
+

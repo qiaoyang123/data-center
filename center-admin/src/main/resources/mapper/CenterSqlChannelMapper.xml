@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ggj.datacenter.business.mapper.CenterSqlChannelMapper">
+  <resultMap id="BaseResultMap" type="com.ggj.datacenter.model.vo.CenterSqlChannelVo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sql_id" jdbcType="BIGINT" property="sqlId" />
+    <result column="channel_id" jdbcType="BIGINT" property="channelId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="channel_name" jdbcType="VARCHAR" property="channelName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sql_id, channel_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from center_sql_channel
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from center_sql_channel
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ggj.datacenter.model.vo.CenterSqlChannelVo">
+    insert into center_sql_channel (id, sql_id, channel_id,
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{sqlId,jdbcType=BIGINT}, #{channelId,jdbcType=BIGINT},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ggj.datacenter.model.vo.CenterSqlChannelVo">
+    insert into center_sql_channel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="sqlId != null">
+        sql_id,
+      </if>
+      <if test="channelId != null">
+        channel_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="sqlId != null">
+        #{sqlId,jdbcType=BIGINT},
+      </if>
+      <if test="channelId != null">
+        #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ggj.datacenter.model.vo.CenterSqlChannelVo">
+    update center_sql_channel
+    <set>
+      <if test="sqlId != null">
+        sql_id = #{sqlId,jdbcType=BIGINT},
+      </if>
+      <if test="channelId != null">
+        channel_id = #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ggj.datacenter.model.vo.CenterSqlChannelVo">
+    update center_sql_channel
+    set sql_id = #{sqlId,jdbcType=BIGINT},
+      channel_id = #{channelId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findAll" parameterType="com.ggj.datacenter.model.vo.CenterSqlChannelVo" resultMap="BaseResultMap">
+    select * from center_sql_channel
+    <where>
+      1 = 1
+      <if test="sqlId != null">
+        and sql_id = #{sqlId,jdbcType=INTEGER}
+      </if>
+      <if test="channelId != null">
+        and channel_id = #{channelId,jdbcType=INTEGER}
+      </if>
+    </where>
+    <if test="orders != null and orders != ''">
+      ORDER BY
+      <foreach collection="orderMap.keys" item="k" separator=",">
+        ${k} ${orderMap[k]}
+      </foreach>
+    </if>
+
+    <if test="rows != null">
+      limit #{start},#{rows}
+    </if>
+  </select>
+
+  <select id="findCount" parameterType="com.ggj.datacenter.model.vo.CenterSqlChannelVo" resultType="java.lang.Long">
+    select count(*) from center_sql_channel
+    <where>
+      1 = 1
+      <if test="sqlId != null">
+        and sql_id = #{sqlId,jdbcType=INTEGER}
+      </if>
+      <if test="channelId != null">
+        and channel_id = #{channelId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+  <select id="findBySqlId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select a.*,b.channel_name from center_sql_channel a
+    left join center_channel b on a.channel_id = b.id
+    where a.sql_id = #{sqlId} and b.channel_status = 1
+  </select>
+
+  <delete id="deleteBySqlId" parameterType="java.lang.Long">
+    delete from center_sql_channel where sql_id = #{sqlId}
+  </delete>
+</mapper>

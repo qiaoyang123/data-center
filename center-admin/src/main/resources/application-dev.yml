@@ -1,0 +1,22 @@
+adonis:
+  xconf:
+    address: 47.99.2.51:2181,47.99.2.51:2182,47.99.2.51:2183
+dubbo:
+  registry:
+    id: my-reg
+    address: zookeeper://localhost:2181
+#    register: false
+  protocol:
+    id: dubbo
+    name: dubbo
+    port: 20882
+
+cas:
+  clientHostUrl: http://192.168.1.190:8083/api
+  serverHostUrl: http://testadmin1.gegejia.com/ygg-sso
+
+front:
+  serverUrl: http://192.168.1.190:8091/
+
+platform_id: 48
+

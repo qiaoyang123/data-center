@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ggj.datacenter.business.mapper.CenterSqlMapper">
+    <resultMap id="BaseResultMap" type="com.ggj.datacenter.model.vo.CenterSqlVo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sql" jdbcType="VARCHAR" property="sql"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="cache_sql" jdbcType="INTEGER" property="cacheSql"/>
+        <result column="cache_sql_time" jdbcType="BIGINT" property="cacheSqlTime"/>
+        <result column="cache_result" jdbcType="INTEGER" property="cacheResult"/>
+        <result column="cache_result_time" jdbcType="BIGINT" property="cacheResultTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, `name`, `sql`, status, `type`, cache_sql, cache_sql_time, cache_result, cache_result_time,
+        create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from center_sql
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from center_sql
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.ggj.datacenter.model.vo.CenterSqlVo">
+        insert into center_sql (id, `name`, `sql`,
+          status, `type`, cache_sql,
+          cache_sql_time, cache_result, cache_result_time,
+          create_time, update_time)
+        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{sql,jdbcType=VARCHAR},
+          #{status,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{cacheSql,jdbcType=INTEGER},
+          #{cacheSqlTime,jdbcType=BIGINT}, #{cacheResult,jdbcType=INTEGER}, #{cacheResultTime,jdbcType=BIGINT},
+          #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ggj.datacenter.model.vo.CenterSqlVo">
+        insert into center_sql
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="sql != null">
+                `sql`,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="cacheSql != null">
+                cache_sql,
+            </if>
+            <if test="cacheSqlTime != null">
+                cache_sql_time,
+            </if>
+            <if test="cacheResult != null">
+                cache_result,
+            </if>
+            <if test="cacheResultTime != null">
+                cache_result_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sql != null">
+                #{sql,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="cacheSql != null">
+                #{cacheSql,jdbcType=INTEGER},
+            </if>
+            <if test="cacheSqlTime != null">
+                #{cacheSqlTime,jdbcType=BIGINT},
+            </if>
+            <if test="cacheResult != null">
+                #{cacheResult,jdbcType=INTEGER},
+            </if>
+            <if test="cacheResultTime != null">
+                #{cacheResultTime,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ggj.datacenter.model.vo.CenterSqlVo">
+        update center_sql
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sql != null">
+                `sql` = #{sql,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="cacheSql != null">
+                cache_sql = #{cacheSql,jdbcType=INTEGER},
+            </if>
+            <if test="cacheSqlTime != null">
+                cache_sql_time = #{cacheSqlTime,jdbcType=BIGINT},
+            </if>
+            <if test="cacheResult != null">
+                cache_result = #{cacheResult,jdbcType=INTEGER},
+            </if>
+            <if test="cacheResultTime != null">
+                cache_result_time = #{cacheResultTime,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ggj.datacenter.model.vo.CenterSqlVo">
+        update center_sql
+        set `name` = #{name,jdbcType=VARCHAR},
+          `sql` = #{sql,jdbcType=VARCHAR},
+          status = #{status,jdbcType=INTEGER},
+          `type` = #{type,jdbcType=INTEGER},
+          cache_sql = #{cacheSql,jdbcType=INTEGER},
+          cache_sql_time = #{cacheSqlTime,jdbcType=BIGINT},
+          cache_result = #{cacheResult,jdbcType=INTEGER},
+          cache_result_time = #{cacheResultTime,jdbcType=BIGINT},
+          create_time = #{createTime,jdbcType=TIMESTAMP},
+          update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="findAll" parameterType="com.ggj.datacenter.model.vo.CenterSqlVo" resultMap="BaseResultMap">
+        select a.*,b.description from center_sql a
+        left join center_sql_expand b
+        on a.id = b.sql_id
+       <if test="channelId != null">
+           left join center_sql_channel c
+           on b.sql_id = c.sql_id
+       </if>
+        <where>
+            1=1
+            <if test="id != null">
+                and a.id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and  a.`name` = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and  a.`status` = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="type != null">
+                and  a.`type` = #{type,jdbcType=INTEGER}
+            </if>
+            <if test="cacheSql != null">
+                and  a.cache_sql = #{cacheSql,jdbcType=INTEGER}
+            </if>
+            <if test="cacheResult != null">
+                and  a.cache_result = #{cacheResult,jdbcType=INTEGER}
+            </if>
+            <if test="channelId != null">
+                and c.channel_id = #{channelId}
+            </if>
+        </where>
+        <if test="orders != null and orders != ''">
+            ORDER BY
+            <foreach collection="orderMap.keys" item="k" separator=",">
+                ${k} ${orderMap[k]}
+            </foreach>
+        </if>
+
+        <if test="rows != null">
+            limit #{start},#{rows}
+        </if>
+    </select>
+
+    <select id="findCount" parameterType="com.ggj.datacenter.model.vo.CenterSqlVo" resultType="java.lang.Long">
+        select count(*) from center_sql a
+        left join center_sql_expand b
+        on a.id = b.sql_id
+        <if test="channelId != null">
+            left join center_sql_channel c
+            on b.sql_id = c.sql_id
+        </if>
+        <where>
+            1=1
+            <if test="id != null">
+                and a.id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and  a.`name` = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and  a.`status` = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="type != null">
+                and  a.`type` = #{type,jdbcType=INTEGER}
+            </if>
+            <if test="cacheSql != null">
+                and  a.cache_sql = #{cacheSql,jdbcType=INTEGER}
+            </if>
+            <if test="cacheResult != null">
+                and  a.cache_result = #{cacheResult,jdbcType=INTEGER}
+            </if>
+            <if test="channelId != null">
+                and c.channel_id = #{channelId}
+            </if>
+        </where>
+    </select>
+</mapper>
