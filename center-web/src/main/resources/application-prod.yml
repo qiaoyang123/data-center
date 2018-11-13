@@ -1,11 +1,11 @@
 xconf:
-  zkAddress: 10.26.110.177:2181,10.26.110.177:2182,10.26.102.221:2181
+  zkAddress: 
 
 dubbo:
   registry:
     id: my-reg
     protocol: zookeeper
-    address: 10.26.110.177:2181,10.26.110.177:2182,10.26.102.221:2181
+    address: 
   protocol:
     id: dubbo
     name: dubbo
